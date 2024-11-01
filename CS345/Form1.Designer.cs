@@ -50,6 +50,7 @@
             pictureBox3 = new PictureBox();
             openFileDialog2 = new OpenFileDialog();
             saveFileDialog2 = new SaveFileDialog();
+            cameraToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -67,7 +68,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem, openForImage2ToolStripMenuItem, saveForImage3ToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem, openForImage2ToolStripMenuItem, saveForImage3ToolStripMenuItem, cameraToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
@@ -75,28 +76,28 @@
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(159, 22);
+            openToolStripMenuItem.Size = new Size(180, 22);
             openToolStripMenuItem.Text = "OpenForImage1";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(159, 22);
+            saveToolStripMenuItem.Size = new Size(180, 22);
             saveToolStripMenuItem.Text = "SaveForImage2";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // openForImage2ToolStripMenuItem
             // 
             openForImage2ToolStripMenuItem.Name = "openForImage2ToolStripMenuItem";
-            openForImage2ToolStripMenuItem.Size = new Size(159, 22);
+            openForImage2ToolStripMenuItem.Size = new Size(180, 22);
             openForImage2ToolStripMenuItem.Text = "OpenForImage2";
             openForImage2ToolStripMenuItem.Click += openForImage2ToolStripMenuItem_Click;
             // 
             // saveForImage3ToolStripMenuItem
             // 
             saveForImage3ToolStripMenuItem.Name = "saveForImage3ToolStripMenuItem";
-            saveForImage3ToolStripMenuItem.Size = new Size(159, 22);
+            saveForImage3ToolStripMenuItem.Size = new Size(180, 22);
             saveForImage3ToolStripMenuItem.Text = "SaveForImage3";
             saveForImage3ToolStripMenuItem.Click += saveForImage3ToolStripMenuItem_Click;
             // 
@@ -212,6 +213,13 @@
             // 
             saveFileDialog2.FileOk += saveFileDialog2_FileOk;
             // 
+            // cameraToolStripMenuItem
+            // 
+            cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
+            cameraToolStripMenuItem.Size = new Size(180, 22);
+            cameraToolStripMenuItem.Text = "Camera";
+            cameraToolStripMenuItem.Click += cameraToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -258,5 +266,6 @@
         private SaveFileDialog saveFileDialog2;
         private ToolStripMenuItem serpiaToolStripMenuItem;
         private ToolStripMenuItem histogramToolStripMenuItem;
+        private ToolStripMenuItem cameraToolStripMenuItem;
     }
 }

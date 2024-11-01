@@ -1,6 +1,10 @@
-using System.Diagnostics;
+using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using OpenCvSharp; 
 
+using Point = System.Drawing.Point;
 namespace CS345
 {
     public partial class Form1 : Form
@@ -210,11 +214,11 @@ namespace CS345
                 int[] histogram = new int[256];
 
 
-                for (int x = 0; x < processed.Width; x++)
+                for (int x = 0; x < loaded.Width; x++)
                 {
-                    for (int y = 0; y < processed.Height; y++)
+                    for (int y = 0; y < loaded.Height; y++)
                     {
-                        Color pixel = processed.GetPixel(x, y);
+                        Color pixel = loaded.GetPixel(x, y);
                         int intensity = (pixel.R + pixel.G + pixel.B) / 3;
                         histogram[intensity]++;
                     }
@@ -247,11 +251,41 @@ namespace CS345
             {
                 for (int y = 0; y < loaded.Height; y++)
                 {
-                    Color pixel = loaded.GetPixel(x, loaded.Height - y - 1); 
+                    Color pixel = loaded.GetPixel(x, loaded.Height - y - 1);
                     processed.SetPixel(x, y, pixel);
                 }
             }
             pictureBox2.Image = processed;
+        }
+
+        private void cameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //using (var capture = new OpenCvSharp.VideoCapture(0))
+            //{
+            //    if (!capture.IsOpened())
+            //    {
+            //        MessageBox.Show("Unable to open the camera.");
+            //        return;
+            //    }
+
+
+            //    using (var frame = new OpenCvSharp.Mat())
+            //    {
+            //        capture.Read(frame);
+
+            //        if (!frame.Empty())
+            //        {
+
+            //            loaded = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(frame);
+            //            pictureBox1.Image = loaded;
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("No frame captured.");
+            //        }
+            //    }
+            //}
         }
     }
 }
