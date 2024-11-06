@@ -2,13 +2,20 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using OpenCvSharp; 
-
+using OpenCvSharp;
+using AForge.Video;
+using AForge.Video.DirectShow;
 using Point = System.Drawing.Point;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace CS345
 {
+
     public partial class Form1 : Form
     {
+        private VideoCaptureDevice webcam;
+        private FilterInfoCollection webcamList;
+
         Bitmap loaded, processed, colorgreen, resultImage;
 
         public Form1()
@@ -125,36 +132,7 @@ namespace CS345
 
         private void subtractToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int width = Math.Min(loaded.Width, processed.Width);
-            int height = Math.Min(loaded.Height, processed.Height);
-
-            resultImage = new Bitmap(width, height);
-            Color mygreen = Color.FromArgb(0, 0, 255);
-            int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
-            int threshold = 5;
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    Color pixel = loaded.GetPixel(x, y);
-                    Color backpixel = processed.GetPixel(x, y);
-
-                    int grey = (pixel.R + pixel.G + pixel.B) / 3;
-                    int subtractValue = Math.Abs(grey - greygreen);
-
-                    if (subtractValue > threshold)
-                    {
-                        resultImage.SetPixel(x, y, backpixel);
-                    }
-                    else
-                    {
-                        resultImage.SetPixel(x, y, pixel);
-                    }
-                }
-            }
-
-            pictureBox3.Image = resultImage;
+            
         }
 
         private void openFileDialog2_FileOk_2(object sender, System.ComponentModel.CancelEventArgs e)
@@ -192,17 +170,12 @@ namespace CS345
                 for (int y = 0; y < loaded.Height; y++)
                 {
                     pixel = loaded.GetPixel(x, y);
-                    int newRed = (int)(0.393 * pixel.R + 0.769 * pixel.G + 0.189 * pixel.B);
-                    int newGreen = (int)(0.349 * pixel.R + 0.686 * pixel.G + 0.168 * pixel.B);
-                    int newBlue = (int)(0.272 * pixel.R + 0.534 * pixel.G + 0.131 * pixel.B);
-
-
-                    newRed = Math.Min(255, newRed);
-                    newGreen = Math.Min(255, newGreen);
-                    newBlue = Math.Min(255, newBlue);
-
-                    Color sepia = Color.FromArgb(newRed, newGreen, newBlue);
-                    processed.SetPixel(x, y, sepia);
+                    Color sep = Color.FromArgb(
+                        Math.Min(255, (int)((0.393 * pixel.R) + (0.769 * pixel.G) + (0.189 * pixel.B))),
+                        Math.Min(255, (int)((0.349 * pixel.R) + (0.686 * pixel.G) + (0.168 * pixel.B))),
+                        Math.Min(255, (int)((0.272 * pixel.R) + (0.534 * pixel.G) + (0.131 * pixel.B)))
+                    );
+                    processed.SetPixel(x, y, sep);
                 }
             }
             pictureBox3.Image = processed;
@@ -261,31 +234,36 @@ namespace CS345
         private void cameraToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            //using (var capture = new OpenCvSharp.VideoCapture(0))
-            //{
-            //    if (!capture.IsOpened())
-            //    {
-            //        MessageBox.Show("Unable to open the camera.");
-            //        return;
-            //    }
+            webcamList = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            webcam = new VideoCaptureDevice(webcamList[0].MonikerString);
+            webcam.NewFrame += new NewFrameEventHandler(webcam_NewFrame);
+            webcam.Start();
+        }
+        private void webcam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap frame = (Bitmap)eventArgs.Frame.Clone();
+            pictureBox1.Image = frame;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            resultImage = new Bitmap(processed.Width, processed.Height);
+            int threshold = 150;
 
-            //    using (var frame = new OpenCvSharp.Mat())
-            //    {
-            //        capture.Read(frame);
+            for (int x = 0; x < processed.Width; x++)
+            {
+                for (int y = 0; y < processed.Height; y++)
+                {
+                    Color pixel = processed.GetPixel(x, y);
+                    Color backpixel = loaded.GetPixel(x, y);
+                    if (pixel.G > threshold && pixel.R < threshold / 2 && pixel.B < threshold / 2)
+                        resultImage.SetPixel(x, y, backpixel);
+                    else
+                        resultImage.SetPixel(x, y, pixel);
+                }
+            }
 
-            //        if (!frame.Empty())
-            //        {
-
-            //            loaded = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(frame);
-            //            pictureBox1.Image = loaded;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("No frame captured.");
-            //        }
-            //    }
-            //}
+            pictureBox3.Image = resultImage;
         }
     }
 }

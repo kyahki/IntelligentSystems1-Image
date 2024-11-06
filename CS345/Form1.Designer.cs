@@ -34,13 +34,13 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             openForImage2ToolStripMenuItem = new ToolStripMenuItem();
             saveForImage3ToolStripMenuItem = new ToolStripMenuItem();
+            cameraToolStripMenuItem = new ToolStripMenuItem();
             dIPToolStripMenuItem = new ToolStripMenuItem();
             pixelCopyToolStripMenuItem = new ToolStripMenuItem();
             greyscalingToolStripMenuItem = new ToolStripMenuItem();
             inversionToolStripMenuItem = new ToolStripMenuItem();
             mirrorHoToolStripMenuItem = new ToolStripMenuItem();
             mirrorVerticalToolStripMenuItem = new ToolStripMenuItem();
-            subtractToolStripMenuItem = new ToolStripMenuItem();
             serpiaToolStripMenuItem = new ToolStripMenuItem();
             histogramToolStripMenuItem = new ToolStripMenuItem();
             pictureBox2 = new PictureBox();
@@ -50,7 +50,7 @@
             pictureBox3 = new PictureBox();
             openFileDialog2 = new OpenFileDialog();
             saveFileDialog2 = new SaveFileDialog();
-            cameraToolStripMenuItem = new ToolStripMenuItem();
+            button1 = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -76,34 +76,41 @@
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(159, 22);
             openToolStripMenuItem.Text = "OpenForImage1";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(159, 22);
             saveToolStripMenuItem.Text = "SaveForImage2";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // openForImage2ToolStripMenuItem
             // 
             openForImage2ToolStripMenuItem.Name = "openForImage2ToolStripMenuItem";
-            openForImage2ToolStripMenuItem.Size = new Size(180, 22);
+            openForImage2ToolStripMenuItem.Size = new Size(159, 22);
             openForImage2ToolStripMenuItem.Text = "OpenForImage2";
             openForImage2ToolStripMenuItem.Click += openForImage2ToolStripMenuItem_Click;
             // 
             // saveForImage3ToolStripMenuItem
             // 
             saveForImage3ToolStripMenuItem.Name = "saveForImage3ToolStripMenuItem";
-            saveForImage3ToolStripMenuItem.Size = new Size(180, 22);
+            saveForImage3ToolStripMenuItem.Size = new Size(159, 22);
             saveForImage3ToolStripMenuItem.Text = "SaveForImage3";
             saveForImage3ToolStripMenuItem.Click += saveForImage3ToolStripMenuItem_Click;
             // 
+            // cameraToolStripMenuItem
+            // 
+            cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
+            cameraToolStripMenuItem.Size = new Size(159, 22);
+            cameraToolStripMenuItem.Text = "Camera";
+            cameraToolStripMenuItem.Click += cameraToolStripMenuItem_Click;
+            // 
             // dIPToolStripMenuItem
             // 
-            dIPToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pixelCopyToolStripMenuItem, greyscalingToolStripMenuItem, inversionToolStripMenuItem, mirrorHoToolStripMenuItem, mirrorVerticalToolStripMenuItem, subtractToolStripMenuItem, serpiaToolStripMenuItem, histogramToolStripMenuItem });
+            dIPToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pixelCopyToolStripMenuItem, greyscalingToolStripMenuItem, inversionToolStripMenuItem, mirrorHoToolStripMenuItem, mirrorVerticalToolStripMenuItem, serpiaToolStripMenuItem, histogramToolStripMenuItem });
             dIPToolStripMenuItem.Name = "dIPToolStripMenuItem";
             dIPToolStripMenuItem.Size = new Size(37, 20);
             dIPToolStripMenuItem.Text = "DIP";
@@ -143,13 +150,6 @@
             mirrorVerticalToolStripMenuItem.Size = new Size(180, 22);
             mirrorVerticalToolStripMenuItem.Text = "Mirror Vertical";
             mirrorVerticalToolStripMenuItem.Click += mirrorVerticalToolStripMenuItem_Click;
-            // 
-            // subtractToolStripMenuItem
-            // 
-            subtractToolStripMenuItem.Name = "subtractToolStripMenuItem";
-            subtractToolStripMenuItem.Size = new Size(180, 22);
-            subtractToolStripMenuItem.Text = "subtract";
-            subtractToolStripMenuItem.Click += subtractToolStripMenuItem_Click;
             // 
             // serpiaToolStripMenuItem
             // 
@@ -213,18 +213,22 @@
             // 
             saveFileDialog2.FileOk += saveFileDialog2_FileOk;
             // 
-            // cameraToolStripMenuItem
+            // button1
             // 
-            cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            cameraToolStripMenuItem.Size = new Size(180, 22);
-            cameraToolStripMenuItem.Text = "Camera";
-            cameraToolStripMenuItem.Click += cameraToolStripMenuItem_Click;
+            button1.Location = new Point(839, 386);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 5;
+            button1.Text = "Subtract";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1073, 492);
+            Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox2);
@@ -259,7 +263,6 @@
         private OpenFileDialog openFileDialog1;
         private SaveFileDialog saveFileDialog1;
         private PictureBox pictureBox3;
-        private ToolStripMenuItem subtractToolStripMenuItem;
         private OpenFileDialog openFileDialog2;
         private ToolStripMenuItem openForImage2ToolStripMenuItem;
         private ToolStripMenuItem saveForImage3ToolStripMenuItem;
@@ -267,5 +270,6 @@
         private ToolStripMenuItem serpiaToolStripMenuItem;
         private ToolStripMenuItem histogramToolStripMenuItem;
         private ToolStripMenuItem cameraToolStripMenuItem;
+        private Button button1;
     }
 }
