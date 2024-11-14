@@ -7,6 +7,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using Point = System.Drawing.Point;
 using static System.Net.Mime.MediaTypeNames;
+using ImageProcess2;
 
 namespace CS345
 {
@@ -132,7 +133,7 @@ namespace CS345
 
         private void subtractToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void openFileDialog2_FileOk_2(object sender, System.ComponentModel.CancelEventArgs e)
@@ -264,6 +265,82 @@ namespace CS345
             }
 
             pictureBox3.Image = resultImage;
+        }
+
+        private void smoothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.Smooth(loaded, 1);
+            pictureBox3.Image = loaded;
+        }
+
+        private void guassianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.GaussianBlur(loaded, 4);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void sharpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.Sharpen(loaded, 11);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void meanRemovalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.GaussianBlur(loaded, 9);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void embossingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacian(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void edgeDetectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EdgeDetectQuick(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacianVertical(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void horizontalOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacianHorizontal(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void horzVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacianHorzVert(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void allDirectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacianAllDir(loaded);
+
+            pictureBox3.Image = loaded;
+        }
+
+        private void lossyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool succes = BitmapFilter.EmbossLaplacianLossy(loaded);
+
+            pictureBox3.Image = loaded;
         }
     }
 }
